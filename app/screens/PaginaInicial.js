@@ -1,14 +1,14 @@
 import { ImageBackground, StyleSheet, Image, Button, View, Text } from 'react-native';
 
-function PaginaInicial (){
+function PaginaInicial ({navigation}){
     return (
         <ImageBackground style={styles.background} source={require("../assets/comboio1.png")}>
                 <Image style={styles.image} source={require("../assets/NomeAplicacao.png")}></Image>
                 <View style={styles.loginButao}>
-                    <Button title="Login" color="#daa520" ></Button>
+                    <Button title="Login" color="#daa520" onPress={() => navigation.navigate('Login')}></Button>
                 </View>
                 <View style={styles.registoButao}>
-                    <Button title="Registar" color="#a7cedf"></Button>
+                    <Button title="Registar" color="#a7cedf" onPress={() => navigation.navigate('Registar')}></Button>
                 </View>        
         </ImageBackground>
     );
