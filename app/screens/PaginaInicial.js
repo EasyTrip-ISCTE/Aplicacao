@@ -1,15 +1,18 @@
-import { ImageBackground, StyleSheet, Image, Button, View, Text } from 'react-native';
+import { ImageBackground, StyleSheet, Image, Button, View, SafeAreaView } from 'react-native';
 
 function PaginaInicial ({navigation}){
     return (
         <ImageBackground style={styles.background} source={require("../assets/comboio1.png")}>
+            
                 <Image style={styles.image} source={require("../assets/NomeAplicacao.png")}></Image>
-                <View style={styles.loginButao}>
-                    <Button title="Login" color="#daa520" onPress={() => navigation.navigate('Login')}></Button>
-                </View>
-                <View style={styles.registoButao}>
-                    <Button title="Registar" color="#a7cedf" onPress={() => navigation.navigate('Registar')}></Button>
-                </View>        
+                <SafeAreaView>
+                    <View style={styles.loginButao}>
+                        <Button title="Login" color="#ffb319" onPress={() => navigation.navigate('Login')}></Button>
+                    </View>
+                    <View style={styles.registoButao}>
+                        <Button title="Registar" color="#a7cedf" onPress={() => navigation.navigate('Registar')}></Button>
+                    </View>
+                </SafeAreaView>        
         </ImageBackground>
     );
 }
