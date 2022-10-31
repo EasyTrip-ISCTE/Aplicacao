@@ -1,14 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, Image, SafeAreaView} from 'react-native';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionic from 'react-native-vector-icons/Ionicons'
 
 import PaginaInicial from './app/screens/PaginaInicial';
 import Login from './app/screens/Login';
 import Registar from './app/screens/Registar';
+import Perfil from './app/screens/Perfil';
+import Definicoes from './app/screens/Definicoes';
+import Servicos from './app/screens/Servicos';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function Tabs(){
+  return(
+    <Tab.Navigator screenOptions={({route}) => ({
+      tabBarIcon: ({focused, size, colour}) => {
+        let iconName; 
+        if(route.name === "Home"){ 
+          iconName = focused ? 'ios-home': 'ios-home-outline' ;
+        } else if(route.name === "Serviços"){ 
+          iconName = focused ? 'add-circle-sharp': 'add-circle' ;
+        } else if(route.name === "Definições"){ 
+          iconName = focused ? 'ios-home' : 'ios-settings' ;
+        }
+        return <Ionic name = {iconName} size={size} colour={colour} />;
+      },
+    })}>
+      <Tab.Screen name="Home" component={Perfil} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+      <Tab.Screen name="Serviços" component={Servicos} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+      <Tab.Screen name="Definições" component={Definicoes}/>
+    </Tab.Navigator>
+  )
+}
 
 export default function App() {
 
@@ -16,8 +41,9 @@ export default function App() {
     <NavigationContainer>
     <Stack.Navigator initialRouteName="PaginaInicial" >
         <Stack.Screen name="PaginaInicial" component={PaginaInicial} options={{headerShown: false}}/>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Registar" component={Registar} />
+        <Stack.Screen name="Login" component={Login} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Registar" component={Registar} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Perfil" component={Tabs} options={{headerShown: false}}/>
     </Stack.Navigator>
   </NavigationContainer>
   );
