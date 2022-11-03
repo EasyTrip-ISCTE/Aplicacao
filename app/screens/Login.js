@@ -38,7 +38,7 @@ function Login( {navigation} ) {
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredentials) => {
             const user = userCredentials.user;
-            const nomeCompleto = getDoc(doc(db, "users", auth.currentUser.uid));
+            //const nomeCompleto = getDoc(doc(db, "users", auth.currentUser.uid));
             navigation.navigate("Perfil")
             console.log("Logged in with:" , user.email);
         })
