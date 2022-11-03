@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, ImageBackground, StyleSheet, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Image, StyleSheet, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword} from "firebase/auth"
 import { db } from '../../firebase';
@@ -33,6 +33,9 @@ function Registar( {navigation} ) {
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
+            <View style={styles.imageView}>
+                <Image resizeMode='center' source={require("../assets/LogoEasyTrip.png")}></Image>
+            </View>
             <View style={styles.inputView}>
                 <TextInput 
                     placeholder='Primeiro Nome' 
@@ -84,6 +87,12 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    imageView: {
+        height: "28%",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingBottom: 50
+    },
     inputView:{
         width: "80%"
     },
@@ -102,12 +111,12 @@ const styles = StyleSheet.create({
         marginTop: 40
     },
     button:{
-        backgroundColor: "rgba(0,100,255,0.5)",
+        backgroundColor: "#a7cedf",
         width: "100%",
         alignItems: "center",
         padding: 15,
         borderRadius: 10,
-        borderColor: "blue",
+        borderColor: "#a7cedf",
         borderWidth: 2
     },
     buttonText:{
