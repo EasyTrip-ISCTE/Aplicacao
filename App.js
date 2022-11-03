@@ -15,22 +15,25 @@ const Tab = createBottomTabNavigator();
 
 function Tabs(){
   return(
-    <Tab.Navigator screenOptions={({route}) => ({
+    <Tab.Navigator backgroundColor="#a7cedf" screenOptions={({route}) => ({
       tabBarIcon: ({focused, size, colour}) => {
         let iconName; 
         if(route.name === "Home"){ 
           iconName = focused ? 'ios-home': 'ios-home-outline' ;
         } else if(route.name === "Serviços"){ 
-          iconName = focused ? 'add-circle-sharp': 'add-circle' ;
+          iconName = focused ? 'add-circle-sharp': 'add-circle-outline' ;
         } else if(route.name === "Definições"){ 
-          iconName = focused ? 'ios-home' : 'ios-settings' ;
+          iconName = focused ? 'ios-settings' : 'ios-settings-outline' ;
         }
         return <Ionic name = {iconName} size={size} colour={colour} />;
       },
+      tabBarActiveBackgroundColor: "#a7cedf",
+      tabBarInactiveBackgroundColor: "#a7cedf",
+  
     })}>
       <Tab.Screen name="Home" component={Perfil} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
       <Tab.Screen name="Serviços" component={Servicos} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
-      <Tab.Screen name="Definições" component={Definicoes}/>
+      <Tab.Screen name="Definições" component={Definicoes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
     </Tab.Navigator>
   )
 }

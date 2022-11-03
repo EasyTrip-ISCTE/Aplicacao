@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, ImageBackground, StyleSheet, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Image, ImageBackground, StyleSheet, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 import { db } from '../../firebase';
 import { getDoc, doc, collection, getDocs } from 'firebase/firestore';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function Login( {navigation} ) {
     const[email, setEmail] = useState('')
@@ -17,10 +18,10 @@ function Login( {navigation} ) {
         })
 
         return unsubscribe;
-    }, [])
+    }, [])    
 
     // referencia da coleção
-    const docRef = doc(db, "users", auth.currentUser.uid);
+    //const docRef = doc(db, "users", auth.currentUser.uid);
 
     // da me o nome do utilizador (não está a funcionar)
     /* getDoc(docRef)
@@ -44,9 +45,16 @@ function Login( {navigation} ) {
         .catch(error => alert(error.message))
     }
 
+    
+
     return (
+        
         <KeyboardAvoidingView style={styles.container} behavior="padding">
+            <View style={styles.imageView}>
+                <Image resizeMode='center' source={require("../assets/LogoEasyTrip.png")}></Image>
+            </View>
             <View style={styles.inputView}>
+                
                 <TextInput 
                     placeholder='Email' 
                     value={email} 
@@ -76,11 +84,17 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: "flex-start",
+        alignItems: "center",
+
+    },
+    imageView: {
+        height: "42%",
+        alignItems: "center",
+        justifyContent: "center"
     },
     inputView:{
-        width: "80%"
+        width: "80%",
     },
     input:{
         backgroundColor: "white",
@@ -94,16 +108,17 @@ const styles = StyleSheet.create({
         width: "60%",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 40
+        marginTop: 40,
+        marginBottom: 40
     },
     button:{
-        backgroundColor: "rgba(0,100,255,0.5)",
+        backgroundColor: "#a7cedf",
         width: "100%",
         alignItems: "center",
         padding: 15,
         borderRadius: 10,
-        borderColor: "blue",
-        borderWidth: 2
+        borderColor: "#a7cedf",
+        borderWidth: 2,
     },
     buttonText:{
         color: "white",
