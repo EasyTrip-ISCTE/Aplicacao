@@ -9,6 +9,8 @@ import Registar from './app/screens/Registar';
 import Perfil from './app/screens/Perfil';
 import Definicoes from './app/screens/Definicoes';
 import Servicos from './app/screens/Servicos';
+import Bilhetes from './app/screens/Bilhetes';
+import Passes from './app/screens/Passes';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,6 +45,8 @@ export default function App() {
         <Stack.Screen name="PaginaInicial" component={PaginaInicial} options={{headerShown: false}}/>
         <Stack.Screen name="Login" component={Login} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Registar" component={Registar} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Bilhetes" component={Bilhetes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Passes" component={Passes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Perfil" component={Tabs} options={{headerShown: false}}/>
     </Stack.Navigator>
   </NavigationContainer>
