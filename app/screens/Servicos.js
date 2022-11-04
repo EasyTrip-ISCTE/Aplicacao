@@ -9,7 +9,7 @@ function Servicos({navigation}) {
                 <Text style={styles.text}>Bilhete</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate("Passes")}>
-                <Image style={styles.image_card} source={require("../assets/passe3.jpg")}/>
+                <Image style={styles.image_card} source={require("../assets/PasseEasyTrip.png")}/>
                 <Text style={styles.text}>Passe</Text>
             </TouchableOpacity>
         </View>

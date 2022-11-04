@@ -3,7 +3,7 @@ import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity } from
 import { auth, db } from '../../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
-function Perfil( navigation ) {
+function Perfil( {navigation} ) {
 
     return (
         <ImageBackground style={styles.background} source={require("../assets/perfil2.jpg")}>
@@ -19,7 +19,7 @@ function Perfil( navigation ) {
                     <Text style={styles.text}>Válido até: 30-11-2022</Text>
                 </View>
                 <View style={styles.buttonView}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Carregamento")}>
                         <Text style={styles.buttonText}>Carregamento</Text>
                     </TouchableOpacity>
                 </View>
@@ -82,11 +82,10 @@ const styles = StyleSheet.create({
     },
     button:{
         backgroundColor: "#ffb319",
-        width: "100%",
         alignItems: "center",
         padding: 15,
         borderRadius: 10,
-
+        borderWidth:4,
     },
     buttonText:{
         color: "black",
