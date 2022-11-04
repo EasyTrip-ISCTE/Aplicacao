@@ -11,6 +11,14 @@ import Definicoes from './app/screens/Definicoes';
 import Servicos from './app/screens/Servicos';
 import Bilhetes from './app/screens/Bilhetes';
 import Passes from './app/screens/Passes';
+import Dados_Pessoais from './app/screens/Dados_Pessoais';
+import Carregar_Documentos from './app/screens/Carregar_Documentos';
+import Verificar_Email from './app/screens/Verificar_Email';
+import Contactos from './app/screens/Contactos';
+import Carregamento from './app/screens/Carregamento';
+import MBWAY from './app/screens/MBWAY';
+import MB from './app/screens/MB';
+import VISA from './app/screens/VISA';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,6 +58,14 @@ export default function App() {
         <Stack.Screen name="Registar" component={Registar} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Bilhetes" component={Bilhetes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Passes" component={Passes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Dados_Pessoais" component={Dados_Pessoais} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Carregar_Documentos" component={Carregar_Documentos} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Verificar_Email" component={Verificar_Email} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Contactos" component={Contactos} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Carregamento" component={Carregamento} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="MBWAY" component={MBWAY} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="MB" component={MB} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="VISA" component={VISA} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Perfil" component={Tabs} options={{headerShown: false}}/>
     </Stack.Navigator>
   </NavigationContainer>
