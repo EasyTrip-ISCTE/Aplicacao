@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-function Carregamento({navigation}) {
+function Pagamento({navigation}) {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Escolha a sua forma de pagamento</Text>
@@ -13,7 +13,10 @@ function Carregamento({navigation}) {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate("VISA")}>
                 <Image style={styles.image_visa} source={require("../assets/visa.png")}/>
-            </TouchableOpacity>  
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("PAYPAL")}>
+                <Image style={styles.image_paypal} source={require("../assets/paypal.png")}/>
+            </TouchableOpacity> 
         </View>
     );
 }
@@ -26,7 +29,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         padding: 5,
         margin: 50,
-        marginBottom:150,
+        marginBottom:100,
        
     },
 
@@ -35,8 +38,8 @@ const styles = StyleSheet.create({
         fontSize:16,
         alignSelf:'center',
         fontFamily: 'serif',
-        borderTopWidth:2,
         borderBottomWidth:2,
+        borderTopWidth:2,
         //borderLeftWidth:4,
         //borderRightWidth:4,
         fontWeight: 'bold',
@@ -54,6 +57,12 @@ const styles = StyleSheet.create({
         alignSelf:'center',
     },
 
+    image_paypal:{
+        height:80,
+        resizeMode:'contain',
+        alignSelf:'center',
+    }
+
 })    
 
-export default Carregamento;
+export default Pagamento;

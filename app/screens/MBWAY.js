@@ -1,5 +1,6 @@
 import React from 'react';
 import { View,Text, Image, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import { Popup } from 'react-native-popup-confirm-toast'
 
 function MBWAY() {
     return(
@@ -17,7 +18,14 @@ function MBWAY() {
                         style={styles.inputNumber}
                     />
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => Popup.show({
+                type: 'success',
+                title: 'Compra Finalizada',
+                textBody: 'O seu pagamento foi efetuado com sucesso',
+                buttonText: 'Fechar',
+                callback: () => Popup.hide()
+                })
+            }>
             <Text style={styles.buttonText}>Pagar</Text>
         </TouchableOpacity>
     </View>
@@ -59,7 +67,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         alignSelf:'center',
         borderRadius: 10,
-        borderWidth:4,
         width:100,
         height:40,
         margin:50,
@@ -69,7 +76,8 @@ const styles = StyleSheet.create({
         textAlignVertical:'center',
         color: "black",
         fontWeight: "700",
-        fontSize: 20
+        fontSize: 20,
+        marginTop:5,
     },
     image_mb:{
         height:120,

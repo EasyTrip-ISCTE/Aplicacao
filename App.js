@@ -15,10 +15,11 @@ import Dados_Pessoais from './app/screens/Dados_Pessoais';
 import Carregar_Documentos from './app/screens/Carregar_Documentos';
 import Verificar_Email from './app/screens/Verificar_Email';
 import Contactos from './app/screens/Contactos';
-import Carregamento from './app/screens/Carregamento';
+import Pagamento from './app/screens/Pagamento';
 import MBWAY from './app/screens/MBWAY';
 import MB from './app/screens/MB';
 import VISA from './app/screens/VISA';
+import PAYPAL from './app/screens/PAYPAL';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,10 +63,11 @@ export default function App() {
         <Stack.Screen name="Carregar_Documentos" component={Carregar_Documentos} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Verificar_Email" component={Verificar_Email} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Contactos" component={Contactos} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
-        <Stack.Screen name="Carregamento" component={Carregamento} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Pagamento" component={Pagamento} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="MBWAY" component={MBWAY} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="MB" component={MB} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="VISA" component={VISA} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="PAYPAL" component={PAYPAL} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Perfil" component={Tabs} options={{headerShown: false}}/>
     </Stack.Navigator>
   </NavigationContainer>
