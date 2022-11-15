@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         alignSelf:'center',
         borderRadius: 10,
-        borderWidth:4,
         width:100,
         height:40,
         margin:50,
@@ -105,7 +104,8 @@ const styles = StyleSheet.create({
         textAlignVertical:'center',
         color: "black",
         fontWeight: "700",
-        fontSize: 20
+        fontSize: 20,
+        marginTop:5,
     },
 })    
 

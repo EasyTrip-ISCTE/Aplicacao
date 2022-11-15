@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 15,
         borderRadius: 10,
-        borderWidth:4,
     },
     buttonText:{
         color: "black",
