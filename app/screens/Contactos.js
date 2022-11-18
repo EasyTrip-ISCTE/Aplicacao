@@ -6,6 +6,10 @@ function Contactos({navigation}) {
         <View style={styles.container}>
             <Text style={styles.title}> Endereço de E-mail:</Text>
             <Text style={styles.text}> easytrip.iscte@gmail.com</Text>
+            <Text style={styles.title}> Telemovel:</Text>
+            <Text style={styles.text}> +351 926 386 658</Text>
+            <Text style={styles.title}> Morada:</Text>
+            <Text style={styles.text}> Avenida das Forças Armadas, 1649-026 Lisboa </Text>
         </View>
     );
 }
@@ -14,13 +18,14 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        marginTop:50,
+        marginTop: 100,
     },
 
     text:{
         textAlign:'center',
         textAlignVertical:'center',
         fontSize:20,
+        marginBottom:80,
     },
 
     title:{
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
         fontFamily: 'serif',
         borderBottomWidth:2,
         borderTopWidth:2,
-        marginBottom:20,
+        marginBottom:10,
     }
 })    
 

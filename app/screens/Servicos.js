@@ -5,7 +5,7 @@ function Servicos({navigation}) {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate("Bilhetes")}>
-                <Image style={styles.image_ticket} source={require("../assets/ticket.png")}/>
+                <Image style={styles.image_ticket} source={require("../assets/ticket1.png")}/>
                 <Text style={styles.text}>Bilhete</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate("Passes")}>
@@ -22,12 +22,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "space-between",
         padding: 5,
-        margin: 50,
-       
+        margin: 70,
     },
 
     image_ticket:{
-        height:190,
+        height:140,
         resizeMode:'contain',
         alignSelf:'center',
     },
