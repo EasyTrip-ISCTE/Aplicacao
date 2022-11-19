@@ -3,7 +3,7 @@ import { View, Text, Button, Image, StyleSheet, KeyboardAvoidingView, TextInput,
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword} from "firebase/auth"
 import { db } from '../../firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
 function Dados_Pessoais( {navigation} ) {
 
@@ -12,24 +12,18 @@ function Dados_Pessoais( {navigation} ) {
     const[morada, setMorada] = useState('')
     const[email, setEmail] = useState('')
     const[password, setPassword] = useState('')
+
+    const docRef = doc(db, "users", auth.currentUser.uid);   
+        
+    getDoc(docRef)
+        .then((doc) => {
+            setNome(doc.data()['PrimeiroNome']);
+            setApelido(doc.data()['Apelido']);
+            setMorada(doc.data()['Morada']);
+            setEmail(auth.currentUser.email);
+        })
     
 
-    const handleSingUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredentials) => {
-            setDoc(doc(db,"users", userCredentials.user.uid), {
-                PrimeiroNome: nome,
-                Apelido: apelido,
-                Morada: morada
-            });
-            const user = userCredentials.user;
-            user.displayName = nome +' '+ apelido;
-            console.log(user.email, user.displayName);
-            navigation.navigate('Login');
-            
-        })
-        .catch(error => alert(error.message))
-    }
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -38,7 +32,7 @@ function Dados_Pessoais( {navigation} ) {
             </View>
             <View style={styles.inputView}>
                 <TextInput 
-                    placeholder='Nome' 
+                    placeholder={nome} 
                     value={nome} 
                     onChangeText={text => setNome(text)} 
                     style={styles.input}
@@ -62,7 +56,7 @@ function Dados_Pessoais( {navigation} ) {
                     style={styles.input}
                 />
                 <TextInput 
-                    placeholder='Password' 
+                    placeholder='Nova password' 
                     value={password} 
                     onChangeText={text => setPassword(text)} 
                     style={styles.input}
@@ -70,7 +64,7 @@ function Dados_Pessoais( {navigation} ) {
                 />
             </View>
             <View style={styles.buttonView}>
-                <TouchableOpacity onPress={ handleSingUp } style={styles.button}>
+                <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>Alterar Dados</Text>
                 </TouchableOpacity>
             </View>

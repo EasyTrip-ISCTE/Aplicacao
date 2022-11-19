@@ -46,19 +46,19 @@ const styles = StyleSheet.create({
     }, 
 
     image_mb:{
-        height:120,
+        height:95,
         resizeMode:'contain',
         alignSelf:'center',
     },
 
     image_visa:{
-        height:100,
+        height:90,
         resizeMode:'contain',
         alignSelf:'center',
     },
 
     image_paypal:{
-        height:80,
+        height:65,
         resizeMode:'contain',
         alignSelf:'center',
     }
