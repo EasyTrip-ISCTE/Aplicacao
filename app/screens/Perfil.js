@@ -19,7 +19,7 @@ function Perfil( {navigation} ) {
                     <Text style={styles.text}>Válido até: 30-11-2022</Text>
                 </View>
                 <View style={styles.buttonView}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Carregamento")}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Pagamento")}>
                         <Text style={styles.buttonText}>Carregamento</Text>
                     </TouchableOpacity>
                 </View>
