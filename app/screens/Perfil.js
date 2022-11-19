@@ -1,20 +1,33 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { useState } from 'react';
 import { auth, db } from '../../firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, Timestamp } from 'firebase/firestore';
 
 function Perfil( {navigation} ) {
+
+    const[nome, setNome] = useState("null");
+    //const[bilhete, setBilhete] = useState("null");
+    
+    
+
+    const docRef = doc(db, "users", auth.currentUser.uid);   
+        
+    getDoc(docRef)
+        .then((doc) => {
+            setNome(doc.data()['PrimeiroNome']);
+        })
 
     return (
         <ImageBackground style={styles.background} source={require("../assets/perfil2.jpg")}>
                 <View style={styles.inicioView}>
-                    <Text style={styles.titleText}>Bem-vindo, Diogo</Text>
+                    <Text style={styles.titleText}>Bem-vindo, {nome}</Text>
                 </View>
                 <View style={styles.cartaoView}>
                     <Image style={styles.image} source={require("../assets/PasseEasyTrip.png")}></Image>
                 </View>
                 <View style={styles.informacaoView}>    
-                    <Text style={styles.text}>Categoria do Passe: Sub-Urbano</Text>
+                    <Text style={styles.text}>Categoria do Passe: Metropolitano</Text>
                     <Text style={styles.text}>Desconto: Sub-23 </Text>
                     <Text style={styles.text}>Válido até: 30-11-2022</Text>
                 </View>
@@ -63,6 +76,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         borderRadius: 10,
         alignItems: "center"
+        
 
     },
     text:{
