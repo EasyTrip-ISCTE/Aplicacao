@@ -17,7 +17,7 @@ function Bilhetes({navigation}) {
 
                 dropdownStyle={{ borderRadius: 10, borderWidth:8, borderColor:"#a7cedf"}}
                 buttonStyle={{backgroundColor:"#a7cedf", alignItems:"center", alignSelf:'center', borderRadius: 10, width:"70%", height:50, marginTop:15, marginBottom:50}}//campo input
-                buttonTextStyle={{fontSize: 20,fontFamily: 'serif',}}//Texto input
+                buttonTextStyle={{fontSize: 20}}//Texto input
                 dropdownBackgroundColor={{backgroundColor:"#a7cedf",fontWeight: 'bold',}}
                 defaultButtonText='Selecione estação'
 
@@ -45,7 +45,7 @@ function Bilhetes({navigation}) {
 
                 dropdownStyle={{ borderRadius: 10, borderWidth:8, borderColor:"#ffb319"}}
                 buttonStyle={{backgroundColor:"#a7cedf", alignItems:"center", alignSelf:'center', borderRadius: 10, width:"70%", height:50, marginTop:15, marginBottom:50}}//campo input
-                buttonTextStyle={{fontSize: 20,fontFamily: 'serif',}}//Texto input
+                buttonTextStyle={{fontSize: 20}}//Texto input
                 dropdownBackgroundColor={{backgroundColor:"#a7cedf",fontWeight: 'bold',}}
                 defaultButtonText='Selecione estação'
 
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
         textAlignVertical:'center',
         fontWeight: 'bold',
         fontSize: 25,
-        fontFamily: 'serif',
     },
 
     buttonSearch:{

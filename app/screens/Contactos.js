@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
         textAlignVertical:'center',
         fontSize:20,
         fontWeight: 'bold',
-        fontFamily: 'serif',
         borderBottomWidth:2,
         borderTopWidth:2,
         marginBottom:10,

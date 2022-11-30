@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:16,
         alignSelf:'center',
-        fontFamily: 'serif',
         borderBottomWidth:2,
         borderTopWidth:2,
         //borderLeftWidth:4,

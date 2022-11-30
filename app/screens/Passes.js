@@ -92,18 +92,17 @@ const styles = StyleSheet.create({
     title:{
         fontSize:20,
         fontWeight: "bold",
-        fontFamily: 'serif',
+        
     
     },
 
     text:{
         fontSize:16,
-        fontFamily: 'serif',
+        
     
     },
     text2:{
         fontSize:10,
-        fontFamily: "serif",
         alignSelf:"center",
     },
 

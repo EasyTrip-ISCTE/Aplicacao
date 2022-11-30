@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     image: {
         resizeMode: "center",
         position: "relative",
-        top: -200,
+        top: -230,
         width: "80%",
         left: -16
         

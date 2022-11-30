@@ -66,7 +66,7 @@ function Login( {navigation} ) {
                     value={password} 
                     onChangeText={text => setPassword(text)} 
                     style={styles.input}
-                    secureTextEntry
+                    //secureTextEntry
                 />
             </View>
             <View style={styles.buttonView}>
