@@ -1,20 +1,24 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-function Pagamento({navigation}) {
+function Pagamento({route, navigation}) {
+
+    const passe = route.params;
+    console.log("PAGAMENTO ",passe);
+
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Escolha a sua forma de pagamento</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("MBWAY")}>
+            <TouchableOpacity onPress={() => navigation.navigate("MBWAY", {passe})}>
                 <Image style={styles.image_mb} source={require("../assets/mbway.png")}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("MB")}>
+            <TouchableOpacity onPress={() => navigation.navigate("MB", {passe})}>
                 <Image style={styles.image_mb} source={require("../assets/multibanco.png")}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("VISA")}>
+            <TouchableOpacity onPress={() => navigation.navigate("VISA", {passe})}>
                 <Image style={styles.image_visa} source={require("../assets/visa.png")}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("PAYPAL")}>
+            <TouchableOpacity onPress={() => navigation.navigate("PAYPAL", {passe})}>
                 <Image style={styles.image_paypal} source={require("../assets/paypal.png")}/>
             </TouchableOpacity> 
         </View>

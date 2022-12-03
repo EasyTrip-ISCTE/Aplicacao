@@ -22,6 +22,7 @@ import VISA from './app/screens/VISA';
 import PAYPAL from './app/screens/PAYPAL';
 import Ajuda from './app/screens/Ajuda';
 import Notificacoes from './app/screens/Notificacoes' 
+import Informacoes from './app/screens/Informacoes';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -74,6 +75,7 @@ export default function App() {
         <Stack.Screen name="PAYPAL" component={PAYPAL} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Notificacoes" component={Notificacoes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Ajuda" component={Ajuda} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Informacoes" component={Informacoes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Perfil" component={Tabs} options={{headerShown: false}}/>
     </Stack.Navigator>
   </NavigationContainer>

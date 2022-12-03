@@ -2,15 +2,18 @@ import React from 'react';
 import { View,Text, Image, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import { Popup } from 'react-native-popup-confirm-toast'
 
-function MBWAY() {
+function MBWAY({route}) {
+
+    const passe1 = route.params;
+    console.log("MBWAY", passe1);
+
+    //a funcao comprar passe vem para aqui
+
     return(
     <View style={styles.container}>
         <Image style={styles.image_mb} source={require("../assets/mbway.png")}/>
         <View style={styles.inputCampos} >
-            <TextInput 
-                placeholder='Montante a depositar'
-                style={styles.inputMontante}
-            />
+            <Text>Montante a depositar: {route.params.passe.passe.Valor}€</Text>
         </View>
         <View style={styles.inputCampos}>    
                     <TextInput 
