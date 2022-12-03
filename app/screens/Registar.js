@@ -12,6 +12,7 @@ function Registar( {navigation} ) {
     const[morada, setMorada] = useState('')
     const[email, setEmail] = useState('')
     const[password, setPassword] = useState('')
+    const[cc, setCc] = useState('')
     
 
     const handleSingUp = () => {
@@ -20,11 +21,11 @@ function Registar( {navigation} ) {
             setDoc(doc(db,"users", userCredentials.user.uid), {
                 PrimeiroNome: nome,
                 Apelido: apelido,
-                Morada: morada
+                Morada: morada,
+                CartaoCidadao: cc
             });
             const user = userCredentials.user;
-            user.displayName = nome +' '+ apelido;
-            console.log(user.email, user.displayName);
+            console.log("Utilizador criado com sucesso", user.email);
             navigation.navigate('Login');
             
         })
@@ -61,12 +62,18 @@ function Registar( {navigation} ) {
                     onChangeText={text => setEmail(text)} 
                     style={styles.input}
                 />
+                 <TextInput 
+                    placeholder='Cartão de Cidadão' 
+                    value={cc} 
+                    onChangeText={text => setCc(text)} 
+                    style={styles.input}
+                />
                 <TextInput 
                     placeholder='Password' 
                     value={password} 
                     onChangeText={text => setPassword(text)} 
                     style={styles.input}
-                    //secureTextEntry
+                    secureTextEntry
                 />
             </View>
             <View style={styles.buttonView}>

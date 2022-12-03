@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { useState } from 'react';
 import { auth, db } from '../../firebase';
@@ -6,17 +6,16 @@ import { doc, getDoc, Timestamp } from 'firebase/firestore';
 
 function Perfil( {navigation} ) {
 
-    const[nome, setNome] = useState("null");
-    //const[bilhete, setBilhete] = useState("null");
-    
-    
-
+    const[nome, setNome] = useState("");
     const docRef = doc(db, "users", auth.currentUser.uid);   
-        
-    getDoc(docRef)
+    
+    useEffect(() => {
+        getDoc(docRef)
         .then((doc) => {
             setNome(doc.data()['PrimeiroNome']);
         })
+    })    
+    
 
     return (
         <ImageBackground style={styles.background} source={require("../assets/perfil2.jpg")}>

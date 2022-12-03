@@ -8,13 +8,13 @@ import { getDoc, doc, collection, getDocs } from 'firebase/firestore';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD70yuxUfMKqjMVT9FRj1wgXVHmDGM2zlk",
-  authDomain: "easytripdatabase.firebaseapp.com",
-  projectId: "easytripdatabase",
-  storageBucket: "easytripdatabase.appspot.com",
-  messagingSenderId: "382145630972",
-  appId: "1:382145630972:web:b8cf8b109a980ceb423d79",
-  measurementId: "G-SNVGQEM6C0"
+  apiKey: "AIzaSyDhFrapbO3fdv7ZdolTIY_nY3bF5IRjgXE",
+  authDomain: "easytrip-grupo10.firebaseapp.com",
+  projectId: "easytrip-grupo10",
+  storageBucket: "easytrip-grupo10.appspot.com",
+  messagingSenderId: "555673218332",
+  appId: "1:555673218332:web:1f0c072b0b2c473e681ed9",
+  measurementId: "G-NVPHB658VP"
 };
 
 // Initialize Firebase

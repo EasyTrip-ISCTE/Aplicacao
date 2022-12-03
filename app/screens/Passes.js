@@ -1,61 +1,50 @@
-import React from 'react';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet,TouchableOpacity, FlatList } from 'react-native';
+import { db } from '../../firebase';
 
-function Passes() {
+function Passes({navigation}) {
+
+    const [passes, setPasses] = useState([]);
     
-    const passes = [
-        {
-            id: 1,
-            categoria: "Navegante Metropolitano",
-            periocidades: "Mensal",
-            preco: "40"
-        },
-        {
-            id: 2,
-            categoria: "Navegante Municipal",
-            periocidades: "Mensal",
-            preco: "30"
-        },
-        {
-            id: 3,
-            categoria: "Navegante Familia",
-            periocidades: "Anual",
-            preco: "80"
-        },
-        {
-            id: 4,
-            categoria: "Navegante Urbano 3ª idade",
-            periocidades: "Mensal",
-            preco: "15"
-        },
-        {
-            id: 5,
-            categoria: "Navegante/Bolt",
-            periocidades: "Mensal",
-            preco: "15"
-        },
-        {
-            id: 6,
-            categoria: "Assinaturas",
-            periocidades: "Mensal",
-            preco: "30"
-        }
-    ]
+    useEffect(() => {
+        let listaPasses = [];
+        getDocs(collection(db, "passes"))
+        .then (query => {
+            query.forEach((doc) => {
+                listaPasses.push({...doc.data(), id:doc.id});
+            })
+            setPasses(listaPasses);
+        });
+    }, [])
+
+    function comprarPasse(passe){
+
+        setDoc(doc(db,"passesUtilizador", userCredentials.user.uid),{
+            Tipo: tipo,
+            Desconto: desconto,
+            Periodicidade: periodicidade,
+            Validade: validade,
+            Valor: valor
+        })
+        
+    }
+   
     
     return (
         <View style={styles.container}>
             <FlatList 
                 style={styles.list}
                 data={passes}
-                keyExtractor= {(item) => String(item.id)}
+                keyExtractor= {(item) => (item.id)}
                 showsVerticalScrollIndicator={false}
                 renderItem = { ({item}) => 
                     <View style={styles.view}>
-                        <TouchableOpacity style={styles.button}>
-                            <Text style={styles.title}>{item.categoria}</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate("Informacoes", {item})} style={styles.button}>
+                            <Text style={styles.title}>{item.Tipo}</Text>
                             <View style={styles.content}>
-                                <Text style={styles.text}>{item.periocidades}</Text>
-                                <Text style={styles.text}>{item.preco}€</Text>
+                                <Text style={styles.text}>{item.Periodicidade}</Text>
+                                <Text style={styles.text}>{item.Valor}€</Text>
                                 
                             </View>
                             <Text style={styles.info}>+ informações</Text>
