@@ -23,6 +23,9 @@ import PAYPAL from './app/screens/PAYPAL';
 import Ajuda from './app/screens/Ajuda';
 import Notificacoes from './app/screens/Notificacoes' 
 import Informacoes from './app/screens/Informacoes';
+import Cartao from './app/screens/Cartao';
+import Historico from './app/screens/Historico';
+import Bilhetes_User from './app/screens/Bilhetes_User';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -75,7 +78,10 @@ export default function App() {
         <Stack.Screen name="PAYPAL" component={PAYPAL} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Notificacoes" component={Notificacoes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Ajuda" component={Ajuda} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
-        <Stack.Screen name="Informacoes" component={Informacoes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Informações" component={Informacoes} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Cartão" component={Cartao} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Histórico" component={Historico} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
+        <Stack.Screen name="Meus Bilhetes" component={Bilhetes_User} options={{headerStyle:{backgroundColor:'#ffb319'}}}/>
         <Stack.Screen name="Perfil" component={Tabs} options={{headerShown: false}}/>
     </Stack.Navigator>
   </NavigationContainer>

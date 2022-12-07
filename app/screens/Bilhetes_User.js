@@ -1,23 +1,24 @@
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet,TouchableOpacity, FlatList } from 'react-native';
-import { db } from '../../firebase';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { auth, db } from '../../firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
-function Passes({navigation}) {
+function Bilhetes_User() {
 
-    const [passes, setPasses] = useState([]);
-    const [isPasse, setIsPasse] = useState(true);
+    const [bilhetes, setBilhetes] = useState([]);
+
+    const queryBilhetes = query(collection(db, "bilhetesUser"), where("idUser", "==", auth.currentUser.uid));
     
     useEffect(() => {
-        let listaPasses = [];
-        getDocs(collection(db, "passes"))
-        .then (query => {
-            query.forEach((doc) => {
-                listaPasses.push({...doc.data(), id:doc.id});
+        let listaBilhetes = [];
+
+        getDocs(queryBilhetes).then(query => {
+            query.forEach((doc1) => {
+                listaBilhetes.push({...doc1.data(), id:doc1.id});
             })
-            console.log("Estou aquiiiiii 1");
-            setPasses(listaPasses);
-        });
+            setBilhetes(listaBilhetes);
+        })
+        //console.log(bilhetes);
     }, [])
 
     
@@ -27,19 +28,17 @@ function Passes({navigation}) {
         <View style={styles.container}>
             <FlatList 
                 style={styles.list}
-                data={passes}
+                data={bilhetes}
                 keyExtractor= {(item) => (item.id)}
                 showsVerticalScrollIndicator={false}
                 renderItem = { ({item}) => 
                     <View style={styles.view}>
-                        <TouchableOpacity onPress={() => navigation.navigate("Informações", {item:item, IsPasse :isPasse})} style={styles.button}>
-                            <Text style={styles.title}>{item.Tipo}</Text>
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.title}>Origem: {item.Origem}</Text>
+                            <Text style={styles.title}>Destino: {item.Destino}</Text>
                             <View style={styles.content}>
-                                <Text style={styles.text}>{item.Periodicidade}</Text>
-                                <Text style={styles.text}>{item.Valor}€</Text>
-                                
+                                <Text style={styles.text}>{item.Preço}€</Text>
                             </View>
-                            <Text style={styles.info}>+ informações</Text>
                         </TouchableOpacity>
                     </View>
                 } 
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     },
 
     title:{
-        fontSize:20,
+        fontSize:17,
         fontWeight: "bold",
         
     
@@ -107,4 +106,6 @@ const styles = StyleSheet.create({
 
 })    
 
-export default Passes;
+
+export default Bilhetes_User;
+
