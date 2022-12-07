@@ -5,7 +5,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 
 function Bilhetes({navigation}) {
 
-
+    const [isPasse, setIsPasse] = useState(false);
     const estacoes = ["Sintra", "Cascais", "Entrecampos", "Campo Grande", "Odivelas", "Amadora", "Benavente", "Açores", "Arronches"]
 
     return (
@@ -66,7 +66,7 @@ function Bilhetes({navigation}) {
 	            }}
             />
         
-            <TouchableOpacity style={styles.buttonSearch} onPress={() => navigation.navigate("Pagamento")}>
+            <TouchableOpacity style={styles.buttonSearch} onPress={() => navigation.navigate("Pagamento", {IsPasse: isPasse})}>
                 <Text style={styles.buttonText}>Pesquisar</Text>
             </TouchableOpacity>
         </View> 
