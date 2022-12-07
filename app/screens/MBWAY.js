@@ -1,8 +1,8 @@
 import React from 'react';
 import { View,Text, Image, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
-import { Popup } from 'react-native-popup-confirm-toast'
+import { Root, Popup } from 'react-native-popup-confirm-toast'
 
-function MBWAY({route}) {
+function MBWAY({route,navigation}) {
 
     const passe1 = route.params;
     console.log("MBWAY", passe1);
@@ -10,28 +10,36 @@ function MBWAY({route}) {
     //a funcao comprar passe vem para aqui
 
     return(
-    <View style={styles.container}>
-        <Image style={styles.image_mb} source={require("../assets/mbway.png")}/>
-        <View style={styles.inputCampos} >
-            <Text>Montante a depositar: {route.params.passe.passe.Valor}€</Text>
+    <Root>
+        <View style={styles.container}>
+            <Image style={styles.image_mb} source={require("../assets/mbway.png")}/>
+            
+            <View style={styles.inputCampos} >
+                <Text>Montante a depositar: {route.params.passe.passe.Valor}€</Text>
+            </View>
+
+            <View style={styles.inputCampos}>    
+                        <TextInput 
+                            placeholder='Numero de Telemovel'
+                            style={styles.inputNumber}
+                        />
+            </View>
+            
+            <TouchableOpacity style={styles.button} onPress={() => Popup.show({
+                    type: 'sucess',
+                    title: 'Compra Finalizada',
+                    textBody: 'Pagamento efetuado com sucesso!',
+                    buttonText: 'Fechar',
+                    okButtonStyle:{ backgroundColor: '#ffb319'},
+                    callback: () => Popup.hide()
+                    })
+                    //navigation.navigate("Pagamento")
+                }>
+                <Text style={styles.buttonText}>Pagar</Text>
+            </TouchableOpacity>
+
         </View>
-        <View style={styles.inputCampos}>    
-                    <TextInput 
-                        placeholder='Numero de Telemovel'
-                        style={styles.inputNumber}
-                    />
-        </View>
-        <TouchableOpacity style={styles.button} onPress={() => Popup.show({
-                type: 'success',
-                title: 'Compra Finalizada',
-                textBody: 'O seu pagamento foi efetuado com sucesso',
-                buttonText: 'Fechar',
-                callback: () => Popup.hide()
-                })
-            }>
-            <Text style={styles.buttonText}>Pagar</Text>
-        </TouchableOpacity>
-    </View>
+    </Root>
 )}
 
 export default MBWAY;
