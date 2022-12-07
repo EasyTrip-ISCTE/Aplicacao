@@ -2,10 +2,11 @@ import { FirebaseError } from 'firebase/app';
 import { getDoc, doc, setDoc, collection, query, getDocs, where, Timestamp, addDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { View,Text, Image, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
-import { Popup } from 'react-native-popup-confirm-toast';
+
+import { Popup, Root } from 'react-native-popup-confirm-toast';
 import { auth, db } from '../../firebase';
 
-function MBWAY({route}) {
+function MBWAY({route,navigation}) {
 
     //const date = new Date();
     //console.log("Data", date.getDay());
@@ -71,21 +72,38 @@ function MBWAY({route}) {
     }
 
     return(
-    <View style={styles.container}>
-        <Image style={styles.image_mb} source={require("../assets/mbway.png")}/>
-        <View style={styles.inputCampos} >
-            <Text>Montante a depositar: {route.params.titulo.titulo.Valor}€</Text>
+    <Root>
+        <View style={styles.container}>
+            <Image style={styles.image_mb} source={require("../assets/mbway.png")}/>
+            
+            <View style={styles.inputCampos} >
+                <Text>Montante a depositar: {route.params.passe.passe.Valor}€</Text>
+            </View>
+
+            <View style={styles.inputCampos}>    
+                        <TextInput 
+                            placeholder='Numero de Telemovel'
+                            style={styles.inputNumber}
+                        />
+            </View>
+            
+            <TouchableOpacity style={styles.button} onPress={() => Popup.show({
+                    type: 'sucess',
+                    title: 'Compra Finalizada',
+                    textBody: 'Pagamento efetuado com sucesso!',
+                    buttonText: 'Fechar',
+                    okButtonStyle:{ backgroundColor: '#ffb319'},
+                    callback: () => Popup.hide()
+                    })
+                    //navigation.navigate("Pagamento")
+                }>
+                <Text style={styles.buttonText}>Pagar</Text>
+            </TouchableOpacity>
+
         </View>
-        <View style={styles.inputCampos}>    
-                    <TextInput 
-                        placeholder='Numero de Telemovel'
-                        style={styles.inputNumber}
-                    />
-        </View>
-        <TouchableOpacity style={styles.button} onPress={comprarPasse}>
-            <Text style={styles.buttonText}>Comprar</Text>
-        </TouchableOpacity>
-    </View>
+    </Root>
+
+
 )}
 
 export default MBWAY;
