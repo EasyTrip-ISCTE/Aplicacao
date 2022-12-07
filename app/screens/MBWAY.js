@@ -36,7 +36,7 @@ function MBWAY({route,navigation}) {
                         setPasse(listaPasse[0]);
                         console.log("Estou aquiiiiii 4");
                     })
-                    console.log("Lista Atual",passe);
+                    console.log("Lista Atual", passe);
                     
                     if(passe == undefined){ 
                         addDoc(collection(db,"passesUser"), {
@@ -77,7 +77,7 @@ function MBWAY({route,navigation}) {
             <Image style={styles.image_mb} source={require("../assets/mbway.png")}/>
             
             <View style={styles.inputCampos} >
-                <Text>Montante a depositar: {route.params.passe.passe.Valor}€</Text>
+                <Text>Montante a depositar: {route.params.titulo.titulo.Valor}€</Text>
             </View>
 
             <View style={styles.inputCampos}>    
@@ -87,23 +87,20 @@ function MBWAY({route,navigation}) {
                         />
             </View>
             
-            <TouchableOpacity style={styles.button} onPress={() => Popup.show({
+            <TouchableOpacity style={styles.button} onPress={() =>{ comprarPasse(); {Popup.show({
                     type: 'sucess',
                     title: 'Compra Finalizada',
                     textBody: 'Pagamento efetuado com sucesso!',
                     buttonText: 'Fechar',
                     okButtonStyle:{ backgroundColor: '#ffb319'},
                     callback: () => Popup.hide()
-                    })
-                    //navigation.navigate("Pagamento")
-                }>
+                    })}}}
+            >
                 <Text style={styles.buttonText}>Pagar</Text>
             </TouchableOpacity>
 
         </View>
     </Root>
-
-
 )}
 
 export default MBWAY;

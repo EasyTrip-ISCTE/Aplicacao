@@ -6306,10 +6306,10 @@
   "resolved" "https://registry.npmjs.org/react-native-image-picker/-/react-native-image-picker-4.10.2.tgz"
   "version" "4.10.2"
 
-"react-native-popup-confirm-toast@^2.2.4":
-  "integrity" "sha512-ASFrRQ/FyiUjsaeyzK/elnKttsQIZQngBMRacKuklYgZMELmdVmefIIFbo8zu7dddISIbDwFAvBTVlEEKzIaqQ=="
-  "resolved" "https://registry.npmjs.org/react-native-popup-confirm-toast/-/react-native-popup-confirm-toast-2.2.4.tgz"
-  "version" "2.2.4"
+"react-native-popup-confirm-toast@^2.2.6":
+  "integrity" "sha512-6UaSw5xz0rXjlNLqKG0NIq+P3iI0nAG4KAnvgNYryjsQzPTmSW4IWhlZaSRB8HxqBziFtQlnlrn0qwYu8/PrGw=="
+  "resolved" "https://registry.npmjs.org/react-native-popup-confirm-toast/-/react-native-popup-confirm-toast-2.2.6.tgz"
+  "version" "2.2.6"
 
 "react-native-safe-area-context@>= 3.0.0", "react-native-safe-area-context@4.3.1":
   "integrity" "sha512-cEr7fknJCToTrSyDCVNg0GRdRMhyLeQa2NZwVCuzEQcWedOw/59ExomjmzCE4rxrKXs6OJbyfNtFRNyewDaHuA=="
