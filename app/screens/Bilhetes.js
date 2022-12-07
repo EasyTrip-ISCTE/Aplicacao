@@ -9,6 +9,7 @@ function Bilhetes({navigation}) {
 
     const [localidades, setLocalidades] = useState([]);
     const [selected, setSelected] = useState("");
+     const [isPasse, setIsPasse] = useState(false);
     
     useEffect(() => {
         let listaLocalidades = [];
@@ -19,7 +20,9 @@ function Bilhetes({navigation}) {
                 })
             setLocalidades(listaLocalidades.map(item => {return {key: item.id, value: item.Nome}}));
         })
-    },[])    
+    },[])
+   
+    
 
     return (
         <View  style={styles.container}>
@@ -51,7 +54,8 @@ function Bilhetes({navigation}) {
             />
             
         
-            <TouchableOpacity style={styles.buttonSearch} onPress={() => navigation.navigate("Pagamento")}>
+
+            <TouchableOpacity style={styles.buttonSearch} onPress={() => navigation.navigate("Pagamento", {IsPasse: isPasse})}>
                 <Text style={styles.buttonText}>Comprar</Text>
             </TouchableOpacity>
         </View> 

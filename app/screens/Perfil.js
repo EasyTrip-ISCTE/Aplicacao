@@ -2,37 +2,65 @@ import React, { useEffect } from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { useState } from 'react';
 import { auth, db } from '../../firebase';
-import { doc, getDoc, Timestamp } from 'firebase/firestore';
+import { doc, getDoc, Timestamp, setDoc } from 'firebase/firestore';
 
 function Perfil( {navigation} ) {
 
     const[nome, setNome] = useState("");
-    const docRef = doc(db, "users", auth.currentUser.uid);   
+    const userRef = doc(db, "users", auth.currentUser.uid);
+    const [numeroCartao, setNumeroCartao] = useState(""); 
+    const [validadeCartao, setValidadeCartao] = useState(""); 
+    const cartaoUserRef = doc(db, "cartaoUser", auth.currentUser.uid);
+
     
     useEffect(() => {
-        getDoc(docRef)
+        getDoc(userRef)
         .then((doc) => {
             setNome(doc.data()['PrimeiroNome']);
-        })
-    })    
+        });
+        getDoc(cartaoUserRef).then((doc1) => {
+            setNumeroCartao(doc1?.data()['Numero']);
+            setValidadeCartao(doc1?.data()['Validade']);
+            console.log("Estou aquiiiiii 2")
+        });
+        
+    },[])    
     
+    function criarCartão(){
+
+        getDoc(cartaoUserRef).then(docSnap => {
+            if(docSnap.exists()){
+                console.log("Já possui um cartão válido");
+            }
+            else{
+                setDoc(doc(db,"cartaoUser", auth.currentUser.uid), {
+                    Numero: "AFD54637388E12",
+                    Validade: "04/2024"
+                });
+                console.log("Criei cartão")
+            }
+        })
+        
+        
+    }
 
     return (
         <ImageBackground style={styles.background} source={require("../assets/perfil2.jpg")}>
                 <View style={styles.inicioView}>
                     <Text style={styles.titleText}>Bem-vindo, {nome}</Text>
                 </View>
-                <View style={styles.cartaoView}>
-                    <Image style={styles.image} source={require("../assets/PasseEasyTrip.png")}></Image>
-                </View>
+                <TouchableOpacity onPress={() => navigation.navigate("Cartão")}>
+                    <View style={styles.cartaoView}>
+                        <Image style={styles.image} source={require("../assets/PasseEasyTrip.png")}></Image>
+                    </View>
+                </TouchableOpacity>
                 <View style={styles.informacaoView}>    
-                    <Text style={styles.text}>Categoria do Passe: Metropolitano</Text>
-                    <Text style={styles.text}>Desconto: Sub-23 </Text>
-                    <Text style={styles.text}>Válido até: 30-11-2022</Text>
+                    <Text style={styles.text}>Número do Passe: {numeroCartao}</Text>
+                    <Text style={styles.text}>Válido até: {validadeCartao}</Text>
                 </View>
                 <View style={styles.buttonView}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Pagamento")}>
-                        <Text style={styles.buttonText}>Carregamento</Text>
+                    <TouchableOpacity style={styles.button} onPress={criarCartão}>
+                        <Text style={styles.buttonText}>Criar Cartão</Text>
                     </TouchableOpacity>
                 </View>
         </ImageBackground>
@@ -75,7 +103,6 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         borderRadius: 10,
         alignItems: "center"
-        
 
     },
     text:{
