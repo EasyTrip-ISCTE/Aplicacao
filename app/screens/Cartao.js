@@ -50,21 +50,32 @@ function Cartao({navigation}) {
                     </TouchableOpacity>
                 </View>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <TouchableOpacity style={styles.view}>
-                        <Text style={styles.text1}>{passe? passe['Tipo'] : "Não possui nenhum passe"}</Text>
-                        <View style={styles.text2View}>    
-                            <Text style={styles.text2}>Validade: {passe? passe['Validade'] : null}</Text>
 
-                        </View> 
+                    <TouchableOpacity style={styles.view}>
+                        <ImageBackground source={require("../assets/PasseEasyTrip.png")} style={styles.viewBackground}>
+                            <Text style={styles.text1}>{passe? passe['Tipo'] : "Não possui nenhum passe"}</Text>
+                            <View style={styles.text2View}>    
+                                <Text style={styles.text2}>{passe? passe['Validade'] : null}</Text>
+                            </View> 
+                        </ImageBackground>
                     </TouchableOpacity>
+
+                   
                     <View style={styles.view}>
-                        <Text style={styles.text1}>Zapping</Text>
-                        <View style={styles.text2View}>
-                            <Text style={styles.text1}>Saldo: 3€</Text> 
-                        </View>   
+                        <ImageBackground source={require("../assets/PasseEasyTrip.png")} style={styles.viewBackground}>
+                            <Text style={styles.text1}>Zapping</Text>
+                            <View style={styles.text2View}>
+                                <Text style={styles.text2}>Saldo: 3€</Text> 
+                            </View>  
+                        </ImageBackground>
                     </View>
+                    
+
                     <TouchableOpacity style={styles.view} onPress={() => navigation.navigate("Meus Bilhetes")}>
-                        <Text style={styles.text1}>Bilhetes</Text>
+                        <ImageBackground source={require("../assets/ticket1.png")} style={styles.viewBackgroundBilhete}>
+                            <Text style={styles.text1}>Os meus Bilhetes</Text>
+                            
+                        </ImageBackground>
                     </TouchableOpacity>
                     
                 </ScrollView>
@@ -90,20 +101,56 @@ const styles = StyleSheet.create({
         flex:1,
         
     },
+
+    image_ticket:{
+        height:80,
+        resizeMode:'contain',
+        alignSelf:'center',
+    },
+    view:{
+        width: 250,
+        height: 160,
+        alignSelf:"center",
+        backgroundColor: "#FFF",
+        borderRadius: 10,
+        marginRight:10,
+        marginLeft:10,
+        
+    },
+    viewBackgroundBilhete:{
+        width: 250,
+        height: 150,
+        opacity:0.9,
+        borderRadius:10,
+        alignSelf:'center',
+    },
+    viewBackground:{
+        width: 250,
+        height: 160,
+        opacity:0.8,
+        borderRadius:10,
+        borderColor:"black",
+        borderWidth:1
+    },
+
     imageView:{
         flex: 0.5
     },
     text:{
         fontSize: 20,
-        padding:8
+        padding:8,
+        fontWeight: 'bold',
     },
     text1:{
-        fontSize: 15,
-        padding:12
+        fontSize: 19,
+        padding:12,
+        fontWeight: 'bold',
+        color:"white",
     },
     text2:{
-        fontSize: 15,
+        fontSize: 17,
         padding:12,
+        fontWeight: 'bold',
         
     },
     text2View:{
@@ -126,21 +173,12 @@ const styles = StyleSheet.create({
         flexDirection:"column",
     
     },
-    view:{
-        width: 250,
-        height: "60%",
-        alignSelf:"center",
-        backgroundColor: "white",
-        borderRadius: 10,
-        marginRight:10,
-        marginLeft:10
-    },
+    
     historicoView:{
         backgroundColor:"#a7cedf",
         width:"90%",
         alignSelf:"center",
         borderRadius:10,
-        bottom:20,
         flexDirection:"column",
         margin:2
     },
