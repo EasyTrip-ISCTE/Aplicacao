@@ -37,7 +37,7 @@ function Bilhetes_User() {
                             <Text style={styles.title}>Origem: {item.Origem}</Text>
                             <Text style={styles.title}>Destino: {item.Destino}</Text>
                             <View style={styles.content}>
-                                <Text style={styles.text}>{item.Preço}€</Text>
+                                <Text style={styles.text}>{item.Valor}€</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
