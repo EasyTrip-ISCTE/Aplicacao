@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, TextInput, View, StyleSheet,TouchableOpacity, FontAwesome, FlatList} from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 
@@ -9,8 +9,12 @@ function Bilhetes({navigation}) {
 
     const [localidades, setLocalidades] = useState([]);
     const [selected, setSelected] = useState("");
-     const [isPasse, setIsPasse] = useState(false);
+    const [isPasse, setIsPasse] = useState(false);
     
+    const [origem, setOrigem]=useState("");
+    const [destino, setDestino]=useState("");
+    const [bilhete, setBilhete]=useState("");
+
     useEffect(() => {
         let listaLocalidades = [];
         onSnapshot(collection(db, 'localidades'), 
@@ -19,43 +23,62 @@ function Bilhetes({navigation}) {
                     listaLocalidades.push({...doc.data(), id:doc.id});
                 })
             setLocalidades(listaLocalidades.map(item => {return {key: item.id, value: item.Nome}}));
+            
         })
     },[])
    
-    
+    function obterBilhete(){
+        const queryBilhete = query(collection(db, "bilhetes"), where("Origem", "==", origem, "AND" ,"Destino", "==", destino));
+        let listaBilhete=[];
+        console.log(origem);
+        console.log(destino);
+        getDocs(queryBilhete).then(query => {
+            query.forEach((doc) => {
+                listaBilhete.push({...doc.data(), id:doc.id});
+            })
+            setBilhete(listaBilhete[0]);
+            //console.log(listaBilhete[0])
+        })
+        console.log("Bilhete",bilhete);
+    }
 
     return (
         <View  style={styles.container}>
             <Text style={styles.title}>Origem:</Text>
 
             <SelectList
-                setSelected={(val) => setSelected(val)}
+                setSelected={setOrigem}
                 data={localidades}
                 save="value"
 
-                boxStyles={{ borderRadius: 10, borderWidth:8, borderColor:"#a7cedf"}}
+                boxStyles={{ backgroundColor:"#a7cedf", borderRadius: 10 }}
                 inputStyles={{fontSize: 18, fontWeight: 'bold'}}
-                dropdownStyles={{ borderRadius: 10, borderWidth:8, borderColor:"#ffb319"}}
+                dropdownStyles={{ borderRadius: 5, borderWidth:4, borderColor:"#ffb319"}}
                 dropdownTextStyles={{fontSize: 18, fontWeight: 'bold'}}
+                placeholder="Selecione uma estação"
+                searchPlaceholder='Selecione uma estação'
             />
 
             <Text>{'\n'}{'\n'}{'\n'}</Text>
             <Text style={styles.title}>Destino:</Text>
             
             <SelectList
-                setSelected={(val) => setSelected(val)}
+                setSelected={setDestino}
                 data={localidades}
                 save="value"
-                
-                boxStyles={{ borderRadius: 10, borderWidth:8, borderColor:"#a7cedf"}}
+
+                placeholder="Selecione uma estação"
+                boxStyles={{ backgroundColor:"#a7cedf", borderRadius: 10}}
                 inputStyles={{fontSize: 18, fontWeight: 'bold'}}
-                dropdownStyles={{ borderRadius: 10, borderWidth:8, borderColor:"#ffb319"}}
+                dropdownStyles={{ borderRadius: 5, borderWidth:4, borderColor:"#ffb319"}}
                 dropdownTextStyles={{fontSize: 18, fontWeight: 'bold'}}
+                SearchPlaceholder='Selecione uma estação'
             />
             
         
 
-            <TouchableOpacity style={styles.buttonSearch} onPress={() => navigation.navigate("Pagamento", {IsPasse: isPasse})}>
+            <TouchableOpacity style={styles.buttonSearch} 
+                onPress={() => {obterBilhete(); navigation.navigate("Pagamento", {titulo:bilhete,IsPasse: isPasse})}}>
                 <Text style={styles.buttonText}>Comprar</Text>
             </TouchableOpacity>
         </View> 

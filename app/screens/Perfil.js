@@ -34,7 +34,7 @@ function Perfil( {navigation} ) {
             }
             else{
                 setDoc(doc(db,"cartaoUser", auth.currentUser.uid), {
-                    Numero: "AFD54637388E12",
+                    Numero: Math.floor(Math.random() * 1000000000000000000000000) + 1,
                     Validade: "04/2024"
                 });
                 console.log("Criei cartão")
