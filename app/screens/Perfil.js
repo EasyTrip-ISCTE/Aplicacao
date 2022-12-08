@@ -3,14 +3,18 @@ import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity} from 
 import { useState } from 'react';
 import { auth, db } from '../../firebase';
 import { doc, getDoc, Timestamp, setDoc } from 'firebase/firestore';
+import { Popup, Root} from 'react-native-popup-confirm-toast';
 
 function Perfil( {navigation} ) {
 
-    const[nome, setNome] = useState("");
+    const [nome, setNome] = useState("");
     const userRef = doc(db, "users", auth.currentUser.uid);
     const [numeroCartao, setNumeroCartao] = useState(""); 
     const [validadeCartao, setValidadeCartao] = useState(""); 
     const cartaoUserRef = doc(db, "cartaoUser", auth.currentUser.uid);
+    const date = new Date();
+    const currentMonth = date.getMonth() + 1;
+    const currentYear = date.getFullYear() + 2;
 
     
     useEffect(() => {
@@ -25,18 +29,34 @@ function Perfil( {navigation} ) {
         });
         
     },[])    
-    
+
     function criarCartão(){
 
         getDoc(cartaoUserRef).then(docSnap => {
             if(docSnap.exists()){
-                console.log("Já possui um cartão válido");
+               // console.log("Já possui um cartão válido");
+                {Popup.show({
+                    type: 'danger',
+                    title: 'Erro na criação',
+                    textBody: 'Já possui um cartão',
+                    buttonText: 'Fechar',
+                    okButtonStyle:{ backgroundColor: '#ffb319'},
+                    callback: () => Popup.hide()
+                })}
             }
             else{
                 setDoc(doc(db,"cartaoUser", auth.currentUser.uid), {
-                    Numero: Math.floor(Math.random() * 1000000000000000000000000) + 1,
-                    Validade: "04/2024"
+                    Numero: Math.floor(Math.random() * 1000000000000000) + 1,
+                    Validade: currentMonth + "/" + currentYear, // "30/1/2022",
                 });
+                {Popup.show({
+                    type: 'sucess',
+                    title: 'Cartão criado com sucesso!',
+                    textBody: 'O seu cartão foi criado com sucesso',
+                    buttonText: 'Fechar',
+                    okButtonStyle:{ backgroundColor: '#ffb319'},
+                    callback: () => Popup.hide()
+                    })}
                 console.log("Criei cartão")
             }
         })
@@ -45,6 +65,7 @@ function Perfil( {navigation} ) {
     }
 
     return (
+    <Root>
         <ImageBackground style={styles.background} source={require("../assets/perfil2.jpg")}>
                 <View style={styles.inicioView}>
                     <Text style={styles.titleText}>Bem-vindo, {nome}</Text>
@@ -64,7 +85,7 @@ function Perfil( {navigation} ) {
                     </TouchableOpacity>
                 </View>
         </ImageBackground>
-        
+    </Root>    
     );
 } 
 export default Perfil;

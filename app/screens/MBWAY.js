@@ -2,7 +2,6 @@ import { FirebaseError } from 'firebase/app';
 import { getDoc, doc, setDoc, collection, query, getDocs, where, Timestamp, addDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { View,Text, Image, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
-
 import { Popup, Root } from 'react-native-popup-confirm-toast';
 import { auth, db } from '../../firebase';
 
@@ -13,12 +12,13 @@ function MBWAY({route,navigation}) {
     //console.log(route.params.titulo.titulo);
 
     const [passe, setPasse] = useState("");
-    
+    const[numeroTelemovel, setNumeroTelemovel] = useState('')
     
     function comprarPasse(){
+
         console.log("AQUIIIII");
         const cartaoUserRef = doc(db, "cartaoUser", auth.currentUser.uid);
-
+        
 
         console.log("MBWAY",route.params.IsPasse);
         //verificar se já existe um passe e se não existir posso escolher um tipo de passe para comprar
@@ -29,29 +29,58 @@ function MBWAY({route,navigation}) {
                 if(route.params.IsPasse){//passes
                     const queryPasse = query(collection(db, "passesUser"), where("idUser", "==", auth.currentUser.uid));
                     getDocs(queryPasse).then(query => {
-                        
                         query.forEach((doc) => {
                             listaPasse.push({...doc.data(), id:doc.id});
                         })
                         setPasse(listaPasse[0]);
-                        console.log("Estou aquiiiiii 4");
+                        if(listaPasse[0] == undefined){//se nao tiver passe, cria passe
+                            addDoc(collection(db,"passesUser"), {
+                                Tipo: route.params.titulo.titulo.Tipo,
+                                Validade: "Dezembro",
+                                idPasse: Number(route.params.titulo.titulo.id),
+                                idUser: auth.currentUser.uid,
+                            });
+                            {Popup.show({
+                                type: 'sucess',
+                                title: 'Passe criado com sucesso',
+                                textBody: 'O seu passe foi criado corretamente',
+                                buttonText: 'Fechar',
+                                okButtonStyle:{ backgroundColor: '#ffb319'},
+                                callback: () => Popup.hide()
+                            })}
+                            console.log("Criei o passe");
+                            return;
+                        } else {//se ja tiver faz update e altera tipo de passe
+                            if(listaPasse[0].Tipo != route.params.titulo.titulo.Tipo) {//se o passe que tem for diferente do que pretende
+                                setDoc(doc(db,"passesUser", listaPasse[0].id), {
+                                    Tipo: route.params.titulo.titulo.Tipo,
+                                    Validade: "Dezembro",
+                                    idPasse: Number(route.params.titulo.titulo.id),
+                                    idUser: auth.currentUser.uid,
+                                });
+                                {Popup.show({
+                                    type: 'sucess',
+                                    title: 'Alteração confirmada',
+                                    textBody: 'O seu passe foi alterado corretamente',
+                                    buttonText: 'Fechar',
+                                    okButtonStyle:{ backgroundColor: '#ffb319'},
+                                    callback: () => Popup.hide()
+                                })}
+                                
+                                console.log("Alterei o meu passe");
+                            } else {//se o passe que tem for igual do que pretende
+                                {Popup.show({
+                                    type: 'danger',
+                                    title: 'ERRO: Já possui o passe selecionado',
+                                    textBody: 'Selecione outro tipo de passe',
+                                    buttonText: 'Fechar',
+                                    okButtonStyle:{ backgroundColor: '#ffb319'},
+                                    callback: () => Popup.hide()
+                                })}
+                                console.log("Não foi possível alterar o passe porque já o tem");
+                            }
+                        }
                     })
-                    console.log("Lista Atual", passe);
-                    
-                    if(passe == undefined){ 
-                        addDoc(collection(db,"passesUser"), {
-                            Tipo: route.params.titulo.titulo.Tipo,
-                            Validade: "Dezembro",
-                            idPasse: Number(route.params.titulo.titulo.id),
-                            idUser: auth.currentUser.uid,
-                           
-                        });
-                        console.log("Criei o passe");
-                        return;
-                    }
-                    else{//update passe - carregar e alterar tipo de passe
-                        console.log("Alterei o meu passe");
-                    }
                 }
                 //bilhetes
                 else{
@@ -66,6 +95,14 @@ function MBWAY({route,navigation}) {
             }
             else{ 
                 //alerta a pedir para criar um cartão na Home
+                {Popup.show({
+                    type: 'danger',
+                    title: 'ERRO: Não possui nenhum cartão',
+                    textBody: 'É necessario criar um cartão para poder comprar bilhetes',
+                    buttonText: 'Fechar',
+                    okButtonStyle:{ backgroundColor: '#ffb319'},
+                    callback: () => Popup.hide()
+                })}
                 console.log("Crie um cartão por favor")
             }
         })      
@@ -81,22 +118,20 @@ function MBWAY({route,navigation}) {
             </View>
 
             <View style={styles.inputCampos}>    
-                        <TextInput 
-                            placeholder='Numero de Telemovel'
-                            style={styles.inputNumber}
-                        />
+                <TextInput 
+                    placeholder='Número de Telemóvel'
+                    value={numeroTelemovel}
+                    onChangeText={text => setNumeroTelemovel(text)} 
+                    style={styles.inputNumber}
+                />
             </View>
             
-            <TouchableOpacity style={styles.button} onPress={() =>{ comprarPasse(); {Popup.show({
-                    type: 'sucess',
-                    title: 'Compra Finalizada',
-                    textBody: 'Pagamento efetuado com sucesso!',
-                    buttonText: 'Fechar',
-                    okButtonStyle:{ backgroundColor: '#ffb319'},
-                    callback: () => Popup.hide()
-                    })}}}
-            >
+            <TouchableOpacity style={styles.button} onPress={() => comprarPasse()}>
                 <Text style={styles.buttonText}>Pagar</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                <Image style={styles.image_inicio} source={require("../assets/inicio.png")}/>
             </TouchableOpacity>
 
         </View>
@@ -156,5 +191,11 @@ const styles = StyleSheet.create({
         resizeMode:'contain',
         alignSelf:'center',
     },
-})    
 
+    image_inicio:{
+        marginTop:50,
+        height:50,
+        resizeMode:'contain',
+        alignSelf:'center',
+    }
+})

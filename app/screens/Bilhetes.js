@@ -35,9 +35,24 @@ function Bilhetes({navigation}) {
         getDocs(queryBilhete).then(query => {
             query.forEach((doc) => {
                 listaBilhete.push({...doc.data(), id:doc.id});
+                console.log("Bilhete",doc.data());
             })
             setBilhete(listaBilhete[0]);
-            //console.log(listaBilhete[0])
+            /*console.log(origem);
+            if(origem == undefined || destino == undefined){
+                {Popup.show({
+                    type: 'warning',
+                    title: 'Erro na compra do bilhete',
+                    textBody: 'Verifique se os campos foram selecionados corretamente',
+                    buttonText: 'Fechar',
+                    okButtonStyle:{ backgroundColor: '#ffb319'},
+                    callback: () => Popup.hide()
+                })}
+            }
+            else{*/
+                 navigation.navigate("Pagamento", {titulo:listaBilhete[0],IsPasse: isPasse})
+            //}
+           
         })
         console.log("Bilhete",bilhete);
     }
@@ -78,7 +93,7 @@ function Bilhetes({navigation}) {
         
 
             <TouchableOpacity style={styles.buttonSearch} 
-                onPress={() => {obterBilhete(); navigation.navigate("Pagamento", {titulo:bilhete,IsPasse: isPasse})}}>
+                onPress={() => obterBilhete() }>
                 <Text style={styles.buttonText}>Comprar</Text>
             </TouchableOpacity>
         </View> 
