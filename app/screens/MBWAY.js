@@ -41,7 +41,7 @@ function MBWAY({route,navigation}) {
                                 idUser: auth.currentUser.uid,
                             });
                             {Popup.show({
-                                type: 'sucess',
+                                type: 'success',
                                 title: 'Passe criado com sucesso',
                                 textBody: 'O seu passe foi criado corretamente',
                                 buttonText: 'Fechar',
@@ -59,7 +59,7 @@ function MBWAY({route,navigation}) {
                                     idUser: auth.currentUser.uid,
                                 });
                                 {Popup.show({
-                                    type: 'sucess',
+                                    type: 'success',
                                     title: 'Alteração confirmada',
                                     textBody: 'O seu passe foi alterado corretamente',
                                     buttonText: 'Fechar',
@@ -91,6 +91,14 @@ function MBWAY({route,navigation}) {
                         Valor: route.params.titulo.titulo.Valor,
                         Valido : true
                     })
+                    {Popup.show({
+                        type: 'sucess',
+                        title: 'Compra confirmada',
+                        textBody: 'O seu bilhete foi comprado com sucesso',
+                        buttonText: 'Fechar',
+                        okButtonStyle:{ backgroundColor: '#ffb319'},
+                        callback: () => Popup.hide()
+                    })}
                 }
             }
             else{ 

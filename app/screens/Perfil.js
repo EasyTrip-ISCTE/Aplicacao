@@ -45,12 +45,16 @@ function Perfil( {navigation} ) {
                 })}
             }
             else{
+                const numero = Math.floor(Math.random() * 1000000000000000) + 1
+                const validade = currentMonth + "/" + currentYear // 1/2022
                 setDoc(doc(db,"cartaoUser", auth.currentUser.uid), {
-                    Numero: Math.floor(Math.random() * 1000000000000000) + 1,
-                    Validade: currentMonth + "/" + currentYear, // "30/1/2022",
+                    Numero: numero,
+                    Validade: validade
                 });
+                setNumeroCartao(numero)
+                setValidadeCartao(validade)
                 {Popup.show({
-                    type: 'sucess',
+                    type: 'success',
                     title: 'Cartão criado com sucesso!',
                     textBody: 'O seu cartão foi criado com sucesso',
                     buttonText: 'Fechar',
@@ -76,7 +80,7 @@ function Perfil( {navigation} ) {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.informacaoView}>    
-                    <Text style={styles.text}>Número do Passe: {numeroCartao}</Text>
+                    <Text style={styles.text}>Número do Cartão: {numeroCartao}</Text>
                     <Text style={styles.text}>Válido até: {validadeCartao}</Text>
                 </View>
                 <View style={styles.buttonView}>

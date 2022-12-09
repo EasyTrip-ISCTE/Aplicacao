@@ -72,8 +72,8 @@ function Cartao({navigation}) {
                     
 
                     <TouchableOpacity style={styles.view} onPress={() => navigation.navigate("Meus Bilhetes")}>
+                    <Text style={styles.text1}>Meus Bilhetes</Text>
                         <ImageBackground source={require("../assets/ticket1.png")} style={styles.viewBackgroundBilhete}>
-                            <Text style={styles.text1}>Os meus Bilhetes</Text>
                             
                         </ImageBackground>
                     </TouchableOpacity>
@@ -119,10 +119,11 @@ const styles = StyleSheet.create({
     },
     viewBackgroundBilhete:{
         width: 250,
-        height: 150,
+        height: 110,
         opacity:0.9,
         borderRadius:10,
         alignSelf:'center',
+        
     },
     viewBackground:{
         width: 250,
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
         fontSize: 19,
         padding:12,
         fontWeight: 'bold',
-        color:"white",
+        color:"black",
     },
     text2:{
         fontSize: 17,
